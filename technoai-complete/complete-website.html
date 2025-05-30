@@ -1,0 +1,430 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Techno AI Research Solutions</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+        
+        // Navigation Component
+        function Navigation() {
+            const [isScrolled, setIsScrolled] = useState(false);
+            
+            useEffect(() => {
+                const handleScroll = () => {
+                    setIsScrolled(window.scrollY > 50);
+                };
+                window.addEventListener("scroll", handleScroll);
+                return () => window.removeEventListener("scroll", handleScroll);
+            }, []);
+            
+            const scrollToSection = (sectionId) => {
+                const element = document.getElementById(sectionId);
+                if (element) {
+                    const offset = 80;
+                    const elementPosition = element.offsetTop - offset;
+                    window.scrollTo({
+                        top: elementPosition,
+                        behavior: "smooth",
+                    });
+                }
+            };
+            
+            return (
+                <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? "bg-white/95 backdrop-blur-sm shadow-sm" : "bg-white"}`}>
+                    <div className="max-w-7xl mx-auto px-6 lg:px-8">
+                        <div className="flex justify-between items-center h-20">
+                            <div className="flex items-center space-x-3">
+                                <span className="text-2xl">🧠</span>
+                                <span className="text-2xl font-bold text-blue-900">TechnoAI</span>
+                            </div>
+                            <div className="hidden md:flex items-center space-x-8">
+                                {["Home", "Solutions", "Research", "About", "Contact"].map((item) => (
+                                    <button
+                                        key={item}
+                                        onClick={() => scrollToSection(item.toLowerCase())}
+                                        className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200"
+                                    >
+                                        {item}
+                                    </button>
+                                ))}
+                            </div>
+                            <button 
+                                onClick={() => scrollToSection("contact")}
+                                className="hidden md:block bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md"
+                            >
+                                Get Started
+                            </button>
+                        </div>
+                    </div>
+                </nav>
+            );
+        }
+        
+        // Hero Component
+        function Hero() {
+            const scrollToSection = (sectionId) => {
+                const element = document.getElementById(sectionId);
+                if (element) {
+                    const offset = 80;
+                    const elementPosition = element.offsetTop - offset;
+                    window.scrollTo({
+                        top: elementPosition,
+                        behavior: "smooth",
+                    });
+                }
+            };
+            
+            return (
+                <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-900 via-blue-800 to-blue-600"></div>
+                    <div className="absolute inset-0 bg-black/20"></div>
+                    
+                    <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center text-white">
+                        <div className="animate-fade-in">
+                            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-8">
+                                Advancing AI Research for{" "}
+                                <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+                                    Tomorrow's Solutions
+                                </span>
+                            </h1>
+                            
+                            <p className="text-xl md:text-2xl mb-12 max-w-4xl mx-auto font-light leading-relaxed opacity-90">
+                                We pioneer cutting-edge artificial intelligence research to solve complex challenges across industries, 
+                                driving innovation through scientific excellence and breakthrough technologies.
+                            </p>
+                            
+                            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
+                                <button 
+                                    onClick={() => scrollToSection("solutions")}
+                                    className="bg-cyan-500 hover:bg-cyan-600 text-white px-8 py-4 text-lg font-semibold rounded-md"
+                                >
+                                    Explore Our Research →
+                                </button>
+                                <button 
+                                    onClick={() => scrollToSection("contact")}
+                                    className="border-2 border-white text-white hover:bg-white hover:text-blue-900 px-8 py-4 text-lg font-semibold rounded-md"
+                                >
+                                    ▶ Schedule Consultation
+                                </button>
+                            </div>
+                            
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+                                <div className="text-center">
+                                    <div className="text-3xl md:text-4xl font-bold text-cyan-400 mb-2">500+</div>
+                                    <div className="text-sm md:text-base text-gray-200">Research Projects</div>
+                                </div>
+                                <div className="text-center">
+                                    <div className="text-3xl md:text-4xl font-bold text-cyan-400 mb-2">50+</div>
+                                    <div className="text-sm md:text-base text-gray-200">AI Specialists</div>
+                                </div>
+                                <div className="text-center">
+                                    <div className="text-3xl md:text-4xl font-bold text-cyan-400 mb-2">15</div>
+                                    <div className="text-sm md:text-base text-gray-200">Years Experience</div>
+                                </div>
+                                <div className="text-center">
+                                    <div className="text-3xl md:text-4xl font-bold text-cyan-400 mb-2">98%</div>
+                                    <div className="text-sm md:text-base text-gray-200">Client Satisfaction</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+        
+        // Solutions Component
+        function Solutions() {
+            const solutions = [
+                {
+                    title: "Machine Learning Research",
+                    description: "Advanced algorithms and model development for predictive analytics, pattern recognition, and automated decision-making systems.",
+                    features: ["Deep Learning Models", "Neural Networks", "Pattern Recognition"]
+                },
+                {
+                    title: "Computer Vision",
+                    description: "Image processing, object detection, and visual recognition systems for automation and intelligent monitoring applications.",
+                    features: ["Image Recognition", "Object Detection", "Real-time Analysis"]
+                },
+                {
+                    title: "Natural Language Processing",
+                    description: "Language understanding, sentiment analysis, and conversational AI systems for enhanced human-computer interaction.",
+                    features: ["Text Analysis", "Sentiment Detection", "Language Generation"]
+                },
+                {
+                    title: "Robotics & Automation",
+                    description: "Intelligent robotics systems combining AI with physical automation for manufacturing and service applications.",
+                    features: ["Smart Robotics", "Process Automation", "Human-Robot Interaction"]
+                },
+                {
+                    title: "Predictive Analytics",
+                    description: "Data-driven forecasting and trend analysis to support strategic decision-making and business optimization.",
+                    features: ["Forecasting Models", "Trend Analysis", "Business Intelligence"]
+                },
+                {
+                    title: "AI Ethics & Safety",
+                    description: "Responsible AI development ensuring fairness, transparency, and safety in artificial intelligence systems.",
+                    features: ["Ethical AI", "Safety Protocols", "Transparent Systems"]
+                }
+            ];
+            
+            return (
+                <section id="solutions" className="py-24 bg-gray-50">
+                    <div className="max-w-7xl mx-auto px-6 lg:px-8">
+                        <div className="text-center mb-16">
+                            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                                AI Research Solutions
+                            </h2>
+                            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                                Our comprehensive suite of AI research services delivers breakthrough innovations 
+                                across multiple domains and industries.
+                            </p>
+                        </div>
+                        
+                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {solutions.map((solution, index) => (
+                                <div key={index} className="group bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                                    <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                                        <span className="text-2xl text-white">🧠</span>
+                                    </div>
+                                    <h3 className="text-2xl font-bold text-gray-900 mb-3">
+                                        {solution.title}
+                                    </h3>
+                                    <p className="text-gray-600 text-base leading-relaxed mb-6">
+                                        {solution.description}
+                                    </p>
+                                    <ul className="space-y-3">
+                                        {solution.features.map((feature, featureIndex) => (
+                                            <li key={featureIndex} className="flex items-center text-gray-600">
+                                                <span className="text-cyan-500 mr-3">✓</span>
+                                                {feature}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+        
+        // Contact Component
+        function Contact() {
+            const [formData, setFormData] = useState({
+                firstName: "",
+                lastName: "",
+                email: "",
+                company: "",
+                projectType: "",
+                message: "",
+            });
+            
+            const handleSubmit = (e) => {
+                e.preventDefault();
+                alert("Thank you for your inquiry! Our team will contact you soon.");
+                setFormData({
+                    firstName: "",
+                    lastName: "",
+                    email: "",
+                    company: "",
+                    projectType: "",
+                    message: "",
+                });
+            };
+            
+            const handleInputChange = (field, value) => {
+                setFormData(prev => ({ ...prev, [field]: value }));
+            };
+            
+            return (
+                <section id="contact" className="py-24 bg-blue-900 text-white relative overflow-hidden">
+                    <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+                        <div className="grid lg:grid-cols-2 gap-16">
+                            <div>
+                                <h2 className="text-4xl md:text-5xl font-bold mb-6">
+                                    Start Your AI Research Journey
+                                </h2>
+                                <p className="text-xl text-blue-100 mb-8 leading-relaxed">
+                                    Ready to transform your business with cutting-edge AI research? Contact our team 
+                                    to discuss your project requirements and explore how we can help achieve your goals.
+                                </p>
+                                
+                                <div className="space-y-6">
+                                    <div className="flex items-start">
+                                        <div className="bg-white/10 rounded-lg p-3 mr-4 flex-shrink-0">
+                                            <span className="text-cyan-400">📍</span>
+                                        </div>
+                                        <div>
+                                            <h3 className="text-lg font-semibold mb-1">Research Headquarters</h3>
+                                            <p className="text-blue-100">123 Innovation Drive, Tech Valley, CA 94025</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-start">
+                                        <div className="bg-white/10 rounded-lg p-3 mr-4 flex-shrink-0">
+                                            <span className="text-cyan-400">📞</span>
+                                        </div>
+                                        <div>
+                                            <h3 className="text-lg font-semibold mb-1">Phone</h3>
+                                            <p className="text-blue-100">+1 (555) 123-4567</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-start">
+                                        <div className="bg-white/10 rounded-lg p-3 mr-4 flex-shrink-0">
+                                            <span className="text-cyan-400">✉️</span>
+                                        </div>
+                                        <div>
+                                            <h3 className="text-lg font-semibold mb-1">Email</h3>
+                                            <p className="text-blue-100">research@technoai.com</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-8">
+                                <h3 className="text-2xl font-bold text-white mb-6">Request Consultation</h3>
+                                <form onSubmit={handleSubmit} className="space-y-6">
+                                    <div className="grid md:grid-cols-2 gap-6">
+                                        <div>
+                                            <label className="block text-blue-100 mb-2">First Name</label>
+                                            <input
+                                                type="text"
+                                                value={formData.firstName}
+                                                onChange={(e) => handleInputChange("firstName", e.target.value)}
+                                                className="w-full bg-white/20 border border-white/30 text-white placeholder-blue-200 rounded-md px-4 py-3"
+                                                placeholder="Enter your first name"
+                                                required
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block text-blue-100 mb-2">Last Name</label>
+                                            <input
+                                                type="text"
+                                                value={formData.lastName}
+                                                onChange={(e) => handleInputChange("lastName", e.target.value)}
+                                                className="w-full bg-white/20 border border-white/30 text-white placeholder-blue-200 rounded-md px-4 py-3"
+                                                placeholder="Enter your last name"
+                                                required
+                                            />
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <label className="block text-blue-100 mb-2">Email Address</label>
+                                        <input
+                                            type="email"
+                                            value={formData.email}
+                                            onChange={(e) => handleInputChange("email", e.target.value)}
+                                            className="w-full bg-white/20 border border-white/30 text-white placeholder-blue-200 rounded-md px-4 py-3"
+                                            placeholder="Enter your email"
+                                            required
+                                        />
+                                    </div>
+                                    
+                                    <div>
+                                        <label className="block text-blue-100 mb-2">Company</label>
+                                        <input
+                                            type="text"
+                                            value={formData.company}
+                                            onChange={(e) => handleInputChange("company", e.target.value)}
+                                            className="w-full bg-white/20 border border-white/30 text-white placeholder-blue-200 rounded-md px-4 py-3"
+                                            placeholder="Enter your company name"
+                                            required
+                                        />
+                                    </div>
+                                    
+                                    <div>
+                                        <label className="block text-blue-100 mb-2">Research Interest</label>
+                                        <select 
+                                            value={formData.projectType} 
+                                            onChange={(e) => handleInputChange("projectType", e.target.value)}
+                                            className="w-full bg-white/20 border border-white/30 text-white rounded-md px-4 py-3"
+                                            required
+                                        >
+                                            <option value="">Select a research area</option>
+                                            <option value="ml">Machine Learning Research</option>
+                                            <option value="cv">Computer Vision</option>
+                                            <option value="nlp">Natural Language Processing</option>
+                                            <option value="robotics">Robotics & Automation</option>
+                                            <option value="analytics">Predictive Analytics</option>
+                                            <option value="ethics">AI Ethics & Safety</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div>
+                                        <label className="block text-blue-100 mb-2">Project Details</label>
+                                        <textarea
+                                            value={formData.message}
+                                            onChange={(e) => handleInputChange("message", e.target.value)}
+                                            className="w-full bg-white/20 border border-white/30 text-white placeholder-blue-200 rounded-md px-4 py-3 resize-none"
+                                            rows={4}
+                                            placeholder="Tell us about your project requirements and goals"
+                                            required
+                                        />
+                                    </div>
+                                    
+                                    <button 
+                                        type="submit" 
+                                        className="w-full bg-cyan-500 hover:bg-cyan-600 text-white py-4 text-lg font-semibold rounded-md transition-colors"
+                                    >
+                                        📧 Submit Request
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+        
+        // Main App Component
+        function App() {
+            return (
+                <div className="min-h-screen bg-white">
+                    <Navigation />
+                    <Hero />
+                    <Solutions />
+                    <Contact />
+                    <footer className="bg-gray-900 text-white py-16">
+                        <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">
+                            <div className="flex items-center justify-center space-x-3 mb-6">
+                                <span className="text-2xl">🧠</span>
+                                <span className="text-2xl font-bold">TechnoAI Research</span>
+                            </div>
+                            <p className="text-gray-400 mb-6">
+                                Leading AI research solutions company advancing the future of artificial intelligence.
+                            </p>
+                            <p className="text-gray-400 text-sm">
+                                © 2024 TechnoAI Research Solutions. All rights reserved.
+                            </p>
+                        </div>
+                    </footer>
+                </div>
+            );
+        }
+        
+        // Render the app
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
